@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('confusionApp')
+angular.module('budgetsApp')
 
     .controller('JumboController', ['$scope', 'menuFactory', function($scope, menuFactory) {
 

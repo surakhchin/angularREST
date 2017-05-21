@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('confusionApp')
+angular.module('budgetsApp')
 
 
         .constant("baseURL","http://localhost:3000/")
