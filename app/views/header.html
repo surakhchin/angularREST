@@ -1,54 +1,97 @@
-<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-    <div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" ui-sref="app"><img src="images/logo.png" height=30 width=41></a>
-            </div>
-            <div id="navbar" class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li><a ui-sref="app">
-                        <span class="glyphicon glyphicon-home"
-                         aria-hidden="true"></span> Home</a></li>
-                    <li><a ui-sref="app.aboutus">
-                        <span class="glyphicon glyphicon-info-sign"
-                         aria-hidden="true"></span> About</a></li>
-                    <li><a ui-sref="app.menu">
-                         <span class="glyphicon glyphicon-list-alt"
-                         aria-hidden="true"></span>
-                          Menu</a></li>
-                     <li><a ui-sref="app.contactus">
-                     <i class="fa fa-envelope-o"></i> Contact</a></li>
-                </ul>
-            </div>
-    </div>
+<nav class="navbar navbar-fixed-top" role="navigation">
+
+    <a target="_blank" href="https://github.com/venediktov/vanilla-rtb"><img style="float: left; margin-bottom: -1px" src="images/vanilla.jpg"></a>
+
+<div id="date" style="float: right; margin-top: 25px; margin-right: 5px">{{date | date:"MMMM dd'th,' yyyy h':'mm a "}}</div>
 </nav>
 
-<header class="jumbotron">
-    <!-- Main component for a primary marketing message or call to action -->
-    <div class="container">
-        <div class="row row-header">
-            <div class="col-xs-12 col-sm-8">
-                <h1>Ristorante con Fusion</h1>
-                <p style="padding:20px;"></p>
-                <p>We take inspiration from the World's best cuisines, and create
-                 a unique fusion experience. Our lipsmacking creations will
-                 tickle your culinary senses!</p>
-            </div>
-            <div class="col-xs-12 col-sm-2">
-                <p style="padding:20px;"></p>
-                <a style="" ui-sref="app.menuid"><img style="display: block; margin-left: auto; margin-right: auto;"
-                               class="img-responsive"  src="images/menu2.png" alt="Uthappizza"></a>
-            </div>
-            <div class="col-xs-12 col-sm-2">
-            <p style="padding:20px;"></p>
-            <img src="images/logo.png" class="img-responsive">
-            </div>
 
+<div class="container">
+    <div class="row row-header">
+        <div class="col-xs-12 col-sm-12">
+            <p style="padding-top: 25px"></p>
+            <div class="alert alert-info">
+
+                <p>Sort Type: {{ sortType }}</p>
+                <p>Sort Reverse: {{ sortReverse }}</p>
+                <p>Search Query: {{ searchBudgets }}</p>
+
+            </div>
+            <form>
+                <div class="form-group">
+                    <div class="input-group">
+                        <div class="input-group-addon"><i class="fa fa-search"></i></div>
+                        <input type="text" class="form-control" placeholder="Search Campaign Budgets" ng-model="searchBudgets">
+                    </div>
+                </div>
+            </form>
+            <table class="table table-bordered table-striped">
+
+    <thead>
+      <tr>
+        <td>
+          <a style="padding-right:30px" href="#" ng-click="sortType = 'id'; sortReverse = !sortReverse">
+            ID
+            <span ng-show="sortType == 'id' && !sortReverse" class="fa fa-caret-down"></span>
+            <span ng-show="sortType == 'id' && sortReverse" class="fa fa-caret-up"></span>
+          </a>
+        </td>
+        <td>
+          <a href="#" ng-click="sortType = 'budget'; sortReverse = !sortReverse">
+            Budget
+            <span ng-show="sortType == 'budget' && !sortReverse" class="fa fa-caret-down"></span>
+            <span ng-show="sortType == 'budget' && sortReverse" class="fa fa-caret-up"></span>
+          </a>
+        </td>
+        <td>
+          <a href="#" ng-click="sortType = 'cpc'; sortReverse = !sortReverse">
+          CPC
+            <span ng-show="sortType == 'cpc' && !sortReverse" class="fa fa-caret-down"></span>
+            <span ng-show="sortType == 'cpc' && sortReverse" class="fa fa-caret-up"></span>
+          </a>
+        </td>
+        <td>
+          <a style="padding-right:45px" href="#" ng-click="sortType = 'cpm'; sortReverse = !sortReverse">
+          CPM
+            <span ng-show="sortType == 'cpm' && !sortReverse" class="fa fa-caret-down"></span>
+            <span ng-show="sortType == 'cpm' && sortReverse" class="fa fa-caret-up"></span>
+          </a>
+        </td>
+        <td>
+          <a href="#" ng-click="sortType = 'spentv'; sortReverse = !sortReverse">
+          SPENTv
+            <span ng-show="sortType == 'spentv' && !sortReverse" class="fa fa-caret-down"></span>
+            <span ng-show="sortType == 'spentv' && sortReverse" class="fa fa-caret-up"></span>
+          </a>
+        </td>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr ng-repeat="budget in budgets | orderBy:sortType:sortReverse | filter:searchBudgets">
+        <td><input type="text" ng-model="budget.id"><span ng-click="deleteBudget(budget.id);" style="padding-left: 5%" class="fa fa-times"></span></td>
+        <td><input type="text" ng-model="budget.budget"></td>
+        <td><input type="text" ng-model="budget.cpc"></td>
+        <td><input type="text" ng-model="budget.cpm"></td>
+        <td><input type="text" ng-model="budget.spentv"></td>
+      </tr>
+    </tbody>
+
+  </table>
+    <p class="text-center text-muted">
+        <a ng-click="addBudget()" href="#">Add a Budget</a>
+    </p>
+    <p class="text-center text-muted">
+        <a href="#" target="_blank">Update Campaign Budgets Object</a>
+    </p>
+
+
+
+  <p class="text-center">
+    <a href="" target="_blank">Delete a Budget</a>
+  </p>
+
+</div>
         </div>
     </div>
-</header>
+</div>
