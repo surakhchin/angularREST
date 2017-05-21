@@ -69,7 +69,7 @@
 
     <tbody>
       <tr ng-repeat="budget in budgets | orderBy:sortType:sortReverse | filter:searchBudgets">
-        <td><input type="text" ng-model="budget.id"><span ng-click="deleteBudget(budget.id);" style="padding-left: 5%" class="fa fa-times"></span></td>
+        <td><input type="text" ng-model="budget.id"><span ng-click="deleteBudget(budget);" style="padding-left: 5%" class="fa fa-times"></span></td>
         <td><input type="text" ng-model="budget.budget"></td>
         <td><input type="text" ng-model="budget.cpc"></td>
         <td><input type="text" ng-model="budget.cpm"></td>
@@ -87,9 +87,6 @@
 
 
 
-  <p class="text-center">
-    <a href="" target="_blank">Delete a Budget</a>
-  </p>
 
 </div>
         </div>

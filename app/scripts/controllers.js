@@ -30,15 +30,19 @@ angular.module('confusionApp')
 
             //code for delete a budget button
 
-            $scope.deleteBudget = function (BudgetId) {
+            $scope.deleteBudget = function (Budget) {
 
-
-                alert("Budget Id is "+BudgetId);
-
-                $scope.array = [$scope.budgets.budget];
-
-                console.log($scope.mybudget);
+                if (confirm("ARE YOU SURE YOU WANT TO DELETE THIS BUDGET PLAN?") == true) {
+                    $scope.removeIndex = $scope.budgets.map(function (item) {
+                    return item.id;
+                }).indexOf(Budget.id);
+                ~$scope.removeIndex && $scope.budgets.splice($scope.removeIndex, 1);
+                } else {
+                    console.log(Budget);
                 console.log($scope.budgets);
+                }
+
+
 
             };
 

@@ -12,7 +12,7 @@ angular.module('confusionApp', ['ui.router','ngResource'])
                     'content': {
                         templateUrl : 'views/header.html',
                         controller  : 'JumboController'
-                    },
+                    }
 
                 }
 
